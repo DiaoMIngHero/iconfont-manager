@@ -78,7 +78,6 @@ const showTable = (list, heads = tableHeads, keys = tableKeys) => {
  */
 const getRootPath = () => {
   const rootPath = process.cwd();
-  console.log('rootPath', rootPath);
   return rootPath;
 }
 

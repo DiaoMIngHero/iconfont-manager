@@ -4,7 +4,7 @@ const { timeout, projectLibraryUrl } = require('../utils/iconfont.config');
 // 信息打印 && 主动抛错 && 路径获取与拼接
 const { chalkGreen, spinnerStart, spinnerSucceed, resolvePath, joinPath } = require('../utils/common');
 // 是否存在 && 解压 && 删除 && 重命名
-const { isExist, removeFile, compressingZip, deleteDir, renameDir } = require('../utils/fileHandle');
+const { isExist, removeFile, compressingZip, getUnzipDirPath, getFontFiles,moveFile,deleteRepeatFile } = require('../utils/fileHandle');
 // 创建Browser && 登录 && 退出 && 处理操作引导
 const { createBrowser, login, logout, handleIknowBtn, pageGo } = require('../utils/operation');
 
@@ -100,14 +100,22 @@ const downloadScript = async (id, name, user, password, filePath, isRelogin, isC
     isFirstEnter = true;
     isNeedLogin = true;
   }
-  // 解压 => 删除 => 重命名，具体操作步骤如下：
+  // 解压 => 删除，具体操作步骤如下：
   // 1.下载成功后的文件名为download.zip
   // 2.将download.zip解压后会变成前缀为font_的文件夹
-  // 3.将原有的iconfont文件夹删除
-  // 4.将前缀为font_的文件夹重命名为iconfont文件夹
+  // 4.将目标文件夹中的同名文件删除
+  // 5.将font_文件夹中的文件移动到目标文件夹中
+  // 6.删除download.zip和font_文件夹
   await compressingZip(savePath);
-  await deleteDir(savePath);
-  await renameDir(savePath);
+  const fontDir = getUnzipDirPath(savePath);
+  const fontFiles = getFontFiles(fontDir);
+  await deleteRepeatFile(savePath, fontFiles);
+  for(let file of fontFiles) {
+    await moveFile(fontDir, file, savePath);
+  }
+  await removeFile(zipPath);
+  await removeFile(fontDir);
+
   chalkGreen(`✔ 图标库:${name} 更新完成🎉🎉🎉`);
 }
 

@@ -19,7 +19,6 @@ const initScript = async (user, password,projectIds) => {
 
   spinnerStart('开始获取图标库在线链接');
 
-  console.log('projectIds---',projectIds);
   const projectIdsArr=projectIds ? projectIds.split(','):[];
   const projectsInfo=projectIdsArr.length ? projects.filter(item=>projectIdsArr.includes(item.id)):projects;
   for (let i = 0; i < projectsInfo.length; i++) {

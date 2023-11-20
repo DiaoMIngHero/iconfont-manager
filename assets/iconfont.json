@@ -1,0 +1,142 @@
+{
+  "id": "4289350",
+  "name": "market-web-components",
+  "font_family": "mkt",
+  "css_prefix_text": "mkt-",
+  "description": "组件库图标",
+  "glyphs": [
+    {
+      "icon_id": "38098164",
+      "name": "cart",
+      "font_class": "cart",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "38071362",
+      "name": "circle-check",
+      "font_class": "circle-check",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "37852729",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "37846337",
+      "name": "arrow-bold-up",
+      "font_class": "arrow-bold-up",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "37846350",
+      "name": "arrow-bold-right",
+      "font_class": "arrow-bold-right",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
+    },
+    {
+      "icon_id": "37846371",
+      "name": "arrow-bold-left",
+      "font_class": "arrow-bold-left",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "1470545",
+      "name": "arrow-bold-down",
+      "font_class": "arrow-bold-down",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "1222030",
+      "name": "arrow-right",
+      "font_class": "arrow-right",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "37844282",
+      "name": "arrow-up",
+      "font_class": "arrow-up",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "37844436",
+      "name": "arrow-down",
+      "font_class": "arrow-down",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "37844448",
+      "name": "arrow-left",
+      "font_class": "arrow-left",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
+      "icon_id": "37815038",
+      "name": "close",
+      "font_class": "close-circle",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "3410225",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "372271",
+      "name": "cc-user",
+      "font_class": "cc-user",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "10202651",
+      "name": "锁",
+      "font_class": "suo",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "7839549",
+      "name": "user",
+      "font_class": "user",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "1337712",
+      "name": "bag",
+      "font_class": "bag",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "37769203",
+      "name": "lightning",
+      "font_class": "lightning",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "37721284",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}

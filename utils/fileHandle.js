@@ -58,21 +58,53 @@ const compressingZip = async(path) => {
   await compressing.zip.uncompress(joinPath(path, 'download.zip'), path)
 }
 
-// 删除原有iconfont文件夹和下载的download.zip
-async function deleteDir(path) {
-  await removeFile(joinPath(path, 'iconfont'));
-  await removeFile(joinPath(path, 'download.zip'));
-}
-
-// 将download.zip解压后前缀为font_的文件夹重命名为iconfont
-async function renameDir(path) {
+// 删除目标文件夹中的同名文件
+async function deleteRepeatFile(path,fileNames) {
   const dirs = fs.readdirSync(path);
   for (let dir of dirs) {
+    const stats = fs.statSync(joinPath(path, dir));
+    if(stats.isFile() && fileNames.includes(dir)) {
+      await removeFile(joinPath(path, dir));
+    }
+  }
+}
+
+// 移动目标文件到指定文件夹
+async function moveFile(basePath,fileName,targetPath) {
+  await fs.move(joinPath(basePath, fileName), joinPath(targetPath, fileName));
+}
+
+// 获取解压缩之后的文件夹路径
+function getUnzipDirPath(path) {
+  const dirs = fs.readdirSync(path);
+  let unzipDirPath = '';
+  for (let dir of dirs) {
     if (dir.startsWith('font_')) {
-      await fs.rename(joinPath(path, dir), joinPath(path, 'iconfont'));
+      unzipDirPath = joinPath(path, dir);
       break;
     }
   }
+  return unzipDirPath;
+}
+
+// 获取download.zip解压后前缀为font_的文件夹的所有文件
+function getFontFiles(fontDirPath) {
+  // 获取font_文件夹下的所有文件
+  const fontDir = fs.readdirSync(fontDirPath);
+  const fontFiles = [];
+  fontDir.forEach(file => {
+    if(file.startsWith('demo')){
+      return;
+    }
+    const filePath = joinPath(fontDirPath, file);
+    const stats = fs.statSync(filePath);
+    if (stats.isFile()) {
+      // 如果是文件，将其路径添加到数组中
+      fontFiles.push(file);
+    }
+  });
+
+  return fontFiles;
 }
 
 module.exports = {
@@ -84,6 +116,8 @@ module.exports = {
   readConfig,
   writeConfig,
   compressingZip,
-  deleteDir,
-  renameDir
+  getFontFiles,
+  getUnzipDirPath,
+  deleteRepeatFile,
+  moveFile
 }
