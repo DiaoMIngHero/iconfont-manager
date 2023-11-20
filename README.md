@@ -36,7 +36,7 @@ iconfont-manager init <phoneNumber> <password> <projectIds>
       "name": "门户网站",
       "user": "18812345678",
       "password": "abc123",
-      "filePath": "初始化后，这个字段是空的，需要手动设置图标保存的绝对路径"
+      "filePath": "初始化后，这个字段是空的，需要手动设置图标保存的绝对路径或者相对路径"
     }
   ]
 }

@@ -82,6 +82,17 @@ const getRootPath = () => {
   return rootPath;
 }
 
+/**
+ * 转换路径
+ * @param {String} path 路径 可能是相对路径，可能是绝对路径
+ */
+const transformPath = (path) => {
+  if(!path.startsWith('/')) {
+    path = require('path').join(process.cwd(), path)
+  }
+  return path;
+}
+
 module.exports = {
   chalkGreen,
   chalkYellow,
@@ -96,5 +107,6 @@ module.exports = {
   findData,
   getNowTime,
   showTable,
-  getRootPath
+  getRootPath,
+  transformPath
 }

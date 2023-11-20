@@ -1,3 +1,4 @@
+const { transformPath } = require('../utils/common');
 // 超时时间，项目管理url
 const { timeout, projectLibraryUrl } = require('../utils/iconfont.config');
 // 信息打印 && 主动抛错 && 路径获取与拼接
@@ -23,6 +24,7 @@ let browser = null,       // Puppeteer的Browser对象
  * @param {Boolean} isCloseBrowser 是否关闭Browser和Page
  */
 const downloadScript = async (id, name, user, password, filePath, isRelogin, isCloseBrowser) => {
+  filePath=transformPath(filePath);
   // 只有首次进入才需要新开Browser和Page
   // 避免出错，只打开一个Browser，压缩包也不大，再者不会同时更新几十个项目，没必要打开多个Browser
   // 若是大数据，可以考虑创建Puppeteer连接池，管理Browser和page的数量及对应关系
