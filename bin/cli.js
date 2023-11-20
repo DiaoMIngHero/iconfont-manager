@@ -14,9 +14,9 @@ program.command('ls')
 program.command('init')
   .alias('i')
   .description('爬取所有的图标库的信息并保存在系统目录下的.iconfontrc文件中')
-  .arguments('<phoneNumber> <password>')
-  .action((phoneNumber, password) => {
-    require('../lib/init')(phoneNumber, password)
+  .arguments('<phoneNumber> <password> <projectIds>')
+  .action((phoneNumber, password, projectIds) => {
+    require('../lib/init')(phoneNumber, password, projectIds)
   })
 
 program.command('refresh')

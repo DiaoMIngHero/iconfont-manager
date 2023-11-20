@@ -1,8 +1,11 @@
 const fs = require('fs-extra');
 const compressing = require('compressing');
-const homedir = require('os').homedir();
 
-const { joinPath } = require('./common');
+const { joinPath,getRootPath } = require('./common');
+
+const rootPath=getRootPath();
+
+const iconfontrcPath=joinPath(rootPath, '.iconfontrc');
 
 // 通用（同步函数）：是否存在
 const isExist = path => fs.existsSync(path)
@@ -20,16 +23,16 @@ const writeJSON = async (file, jsonData) => await fs.writeJSON(file, jsonData)
 const readJSON = async (jsonFile) => await fs.readJSON(jsonFile)
 
 // 错误提示
-const errorTip = `.iconfontrc不存在，请使用iconfont-manager init <phoneNumber> <password>进行初始化或在${homedir}目录下新建该文件`
+const errorTip = `.iconfontrc不存在，请使用iconfont-manager init <phoneNumber> <password>进行初始化或在${rootPath}目录下新建该文件`
 
 // 解析用户目录下的.iconfontrc文件，获取所有的图标库信息
 const readConfig = async () => {
   let config = []
-  if(!isExist(joinPath(homedir, '.iconfontrc'))) {
+  if(!isExist(iconfontrcPath)) {
     console.error(errorTip);
   } else {
     try {
-      config = await readJSON(joinPath(homedir, '.iconfontrc'));
+      config = await readJSON(iconfontrcPath);
     } catch(err) {
       console.error(err);
     }
@@ -39,11 +42,11 @@ const readConfig = async () => {
 
 // 将新的图标库信息写入用户目录下的.iconfontrc文件
 const writeConfig = async (content) => {
-  if(!isExist(joinPath(homedir, '.iconfontrc'))) {
+  if(!isExist(joinPath(rootPath, '.iconfontrc'))) {
     console.error(errorTip);
   } else {
     try {
-      await writeJSON(joinPath(homedir, '.iconfontrc'), content);
+      await writeJSON(iconfontrcPath, content);
     } catch(err) {
       console.error(err)
     }

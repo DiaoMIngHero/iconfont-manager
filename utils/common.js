@@ -73,6 +73,15 @@ const showTable = (list, heads = tableHeads, keys = tableKeys) => {
   console.log(table.toString());
 }
 
+/**
+ * 获取运行时所处项目的根目录
+ */
+const getRootPath = () => {
+  const rootPath = process.cwd();
+  console.log('rootPath', rootPath);
+  return rootPath;
+}
+
 module.exports = {
   chalkGreen,
   chalkYellow,
@@ -86,5 +95,6 @@ module.exports = {
   extend,
   findData,
   getNowTime,
-  showTable
+  showTable,
+  getRootPath
 }

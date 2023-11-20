@@ -14,6 +14,12 @@ iconfont-manager是一个可以管理所有iconfont图标库更新的工具。
 ``` js
 iconfont-manager init <phoneNumber> <password>
 ```
+
+如果只想拉取指定的项目,可以传入第三个参数`projectIds`,projectIds以逗号分隔
+``` js
+iconfont-manager init <phoneNumber> <password> <projectIds>
+```
+
 ![](https://pic-host.oss-cn-shenzhen.aliyuncs.com/img/step1-1.png)
 ``` json
 {
@@ -37,7 +43,7 @@ iconfont-manager init <phoneNumber> <password>
 ```
 
 ### 2. 查看所有图标库
-读取用户目录下的`.iconfontrc`文件，将所有的iconfont图标库信息通过列表的形式展现。
+读取用项目目录下的`.iconfontrc`文件，将所有的iconfont图标库信息通过列表的形式展现。
 ``` js
 iconfont-manager ls
 ```
