@@ -1,6 +1,6 @@
 {
   "name": "iconfont-super-manager",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "iconfont的自动化更新和管理",
   "main": "index.js",
   "scripts": {
