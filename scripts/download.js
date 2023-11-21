@@ -14,16 +14,21 @@ let browser = null,       // Puppeteer的Browser对象
     isNeedLogin = true;   // 是否需要登录
 
 /**
- * @description 输入一个图标库的信息，使用puppeteer模拟登录，下载图标并解压到相应目录
- * @param {String}  id 项目id
- * @param {String}  name 项目名称
- * @param {String}  user 账号（暂时只支持手机号）
- * @param {String}  password 密码
- * @param {String}  filePath 文件保存地址
- * @param {Boolean} isRelogin 是否重新登录（多个用户时，不关闭Browser，重新登录即可）
- * @param {Boolean} isCloseBrowser 是否关闭Browser和Page
+ * @description 下载图标库
+ * @param {Object} options 图标库信息
+ * @param {String} options.id 图标库id
+ * @param {String} options.name 图标库名称
+ * @param {String} options.user 用户名
+ * @param {String} options.password 密码
+ * @param {String} options.filePath 下载路径
+ * @param {String} options.includes 需要下载的文件
+ * @param {String} options.excludes 排除下载的文件
+ * @param {String} options.filePath 下载路径
+ * @param {Boolean} isRelogin 是否需要重新登录
+ * @param {Boolean} isCloseBrowser 是否需要关闭Browser
  */
-const downloadScript = async (id, name, user, password, filePath, isRelogin, isCloseBrowser) => {
+const downloadScript = async (options, isRelogin, isCloseBrowser) => {
+  let { id, name, user, password, filePath,includes,excludes } = options;
   filePath=transformPath(filePath);
   // 只有首次进入才需要新开Browser和Page
   // 避免出错，只打开一个Browser，压缩包也不大，再者不会同时更新几十个项目，没必要打开多个Browser
@@ -108,7 +113,7 @@ const downloadScript = async (id, name, user, password, filePath, isRelogin, isC
   // 6.删除download.zip和font_文件夹
   await compressingZip(savePath);
   const fontDir = getUnzipDirPath(savePath);
-  const fontFiles = getFontFiles(fontDir);
+  const fontFiles = getFontFiles(fontDir,includes,excludes);
   await deleteRepeatFile(savePath, fontFiles);
   for(let file of fontFiles) {
     await moveFile(fontDir, file, savePath);

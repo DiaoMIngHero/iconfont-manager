@@ -88,12 +88,32 @@ function getUnzipDirPath(path) {
 }
 
 // 获取download.zip解压后前缀为font_的文件夹的所有文件
-function getFontFiles(fontDirPath) {
+function getFontFiles(fontDirPath,includes,excludes) {
   // 获取font_文件夹下的所有文件
   const fontDir = fs.readdirSync(fontDirPath);
   const fontFiles = [];
+  const isPass = (file) => {
+    if(includes && includes.length){
+      return includes.some(item=>{
+        const reg=new RegExp(item);
+        return reg.test(file);
+      })
+    }
+    
+    if(excludes && excludes.length){
+      return excludes.every(item=>{
+        const reg=new RegExp(item);
+        return !reg.test(file);
+      })
+    }
+
+    return true;
+  }
   fontDir.forEach(file => {
     if(file.startsWith('demo')){
+      return;
+    }
+    if(!isPass(file)){
       return;
     }
     const filePath = joinPath(fontDirPath, file);

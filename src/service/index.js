@@ -61,9 +61,8 @@ router.all('/websocket', async ctx => {
   })
 
   async function updateOne(project) {
-    const { id, name, user, password, filePath} = project
     try{
-      await downloadScript(id, name, user, password, filePath, false, true)
+      await downloadScript({...project}, false, true)
       ctx.websocket.send(JSON.stringify({
         type: SOCKET_TYPE['MESSAGE_TIP'],
         data: {
@@ -91,8 +90,7 @@ router.all('/websocket', async ctx => {
         const current = projects.shift();
         const isCloseBrowser = projects.length === 0
         const isRelogin = projects.length > 0 && projects[0].user !== current.user
-        const { id, name, user, password, filePath} = current
-        await downloadScript(id, name, user, password, filePath, isRelogin, isCloseBrowser)
+        await downloadScript({...current}, isRelogin, isCloseBrowser)
       }
       ctx.websocket.send(JSON.stringify({
         type: SOCKET_TYPE['MESSAGE_TIP'],
