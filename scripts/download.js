@@ -7,7 +7,7 @@ const { chalkGreen, spinnerStart, spinnerSucceed, resolvePath, joinPath } = requ
 const { isExist, removeFile, compressingZip, getUnzipDirPath, getFontFiles,moveFile,deleteRepeatFile } = require('../utils/fileHandle');
 // 创建Browser && 登录 && 退出 && 处理操作引导
 const { createBrowser, login, logout, handleIknowBtn, pageGo } = require('../utils/operation');
-
+const { getFontClass } = require('../utils/operation');
 let browser = null,       // Puppeteer的Browser对象
     page = null,          // Puppeteer的Page对象
     isFirstEnter = true,  // 是否首次进入
@@ -87,6 +87,7 @@ const downloadScript = async (options, isRelogin, isCloseBrowser) => {
     }
   }
   spinnerSucceed('图标下载完成');
+  const fontClass=await getFontClass(page, id);
   // 同时更新多个图标库（且是不同用户时），在不关闭Browser和Page的情况下重新登录
   if (isRelogin) {
     await logout(page);
@@ -122,6 +123,7 @@ const downloadScript = async (options, isRelogin, isCloseBrowser) => {
   await removeFile(fontDir);
 
   chalkGreen(`✔ 图标库:${name} 更新完成🎉🎉🎉`);
+  return {fontClass}
 }
 
 module.exports = downloadScript
